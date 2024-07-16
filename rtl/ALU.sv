@@ -14,8 +14,8 @@ logic signed [31:0] SrcA_s; logic signed [31:0] SrcB_s;
 assign SrcA_s = SrcA_i;
 assign SrcB_s = SrcB_i;
 assign zero = (ALUResult_o == 0);
-assign gt = SrcA_s >= SrcB_s;
-assign gtu = SrcA_i >= SrcB_i;
+assign gt = (SrcA_s >= SrcB_s);
+assign gtu = (SrcA_i >= SrcB_i);
 
 assign Flags_o = {zero, gt, gtu};
 
