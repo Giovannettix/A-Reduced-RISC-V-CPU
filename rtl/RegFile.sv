@@ -12,8 +12,6 @@ module RegFile(
     output [31:0] t1 
 );
 
-//logic [31:0] registers [6:0];
-
 bit [31:0] registers[31];
 
 assign a0 = registers[10];
