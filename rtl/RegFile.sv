@@ -7,7 +7,9 @@ module RegFile(
     input [31:0] WD3,
     output reg [31:0] RD1,
     output reg [31:0] RD2,
-    output [31:0] a0 
+    output [31:0] a0,
+    output [31:0] a1,
+    output [31:0] t1 
 );
 
 //logic [31:0] registers [6:0];
@@ -15,6 +17,8 @@ module RegFile(
 bit [31:0] registers[31];
 
 assign a0 = registers[10];
+assign a1 = registers[11];
+assign t1 = registers[6];
 
 always_ff @(posedge clk) begin
     if(WE3) registers[AD3] <= WD3;

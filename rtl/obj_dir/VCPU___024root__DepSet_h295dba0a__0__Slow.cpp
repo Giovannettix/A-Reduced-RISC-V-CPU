@@ -11,13 +11,15 @@ VL_ATTR_COLD void VCPU___024root___initial__TOP__0(VCPU___024root* vlSelf) {
     VCPU__Syms* const __restrict vlSymsp VL_ATTR_UNUSED = vlSelf->vlSymsp;
     VL_DEBUG_IF(VL_DBG_MSGF("+    VCPU___024root___initial__TOP__0\n"); );
     // Init
-    VlWide<3>/*95:0*/ __Vtemp_hb2b9696e__0;
+    VlWide<5>/*159:0*/ __Vtemp_h3d20b13c__0;
     // Body
     VL_WRITEF("Loading program.\n");
-    __Vtemp_hb2b9696e__0[0U] = 0x2e6d656dU;
-    __Vtemp_hb2b9696e__0[1U] = 0x6e746572U;
-    __Vtemp_hb2b9696e__0[2U] = 0x636f75U;
-    VL_READMEM_N(true, 32, VL_CVT_PACK_STR_NW(3, __Vtemp_hb2b9696e__0)
+    __Vtemp_h3d20b13c__0[0U] = 0x2e6d656dU;
+    __Vtemp_h3d20b13c__0[1U] = 0x66696564U;
+    __Vtemp_h3d20b13c__0[2U] = 0x6d6f6469U;
+    __Vtemp_h3d20b13c__0[3U] = 0x7465725fU;
+    __Vtemp_h3d20b13c__0[4U] = 0x636f756eU;
+    VL_READMEM_N(true, 32, VL_CVT_PACK_STR_NW(5, __Vtemp_h3d20b13c__0)
                  , vlSelf->CPU__DOT__instructions__DOT__ram_array
                  , 0, ~0ULL);
 }
@@ -29,6 +31,10 @@ VL_ATTR_COLD void VCPU___024root___settle__TOP__0(VCPU___024root* vlSelf) {
     // Body
     vlSelf->a0 = vlSelf->CPU__DOT__regfile__DOT__registers
         [0xaU];
+    vlSelf->a1 = vlSelf->CPU__DOT__regfile__DOT__registers
+        [0xbU];
+    vlSelf->t1 = vlSelf->CPU__DOT__regfile__DOT__registers
+        [6U];
     vlSelf->CPU__DOT__instr = vlSelf->CPU__DOT__instructions__DOT__ram_array
         .at(vlSelf->CPU__DOT__pc);
     vlSelf->CPU__DOT__alusrc = (((((3U == (0x7fU & vlSelf->CPU__DOT__instr)) 
@@ -380,6 +386,8 @@ VL_ATTR_COLD void VCPU___024root___ctor_var_reset(VCPU___024root* vlSelf) {
     vlSelf->clk = VL_RAND_RESET_I(1);
     vlSelf->rst = VL_RAND_RESET_I(1);
     vlSelf->a0 = VL_RAND_RESET_I(32);
+    vlSelf->a1 = VL_RAND_RESET_I(32);
+    vlSelf->t1 = VL_RAND_RESET_I(32);
     vlSelf->CPU__DOT__pc = VL_RAND_RESET_I(32);
     vlSelf->CPU__DOT__instr = VL_RAND_RESET_I(32);
     vlSelf->CPU__DOT__alusrc = VL_RAND_RESET_I(1);

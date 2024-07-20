@@ -24,6 +24,8 @@ class VCPU___024root final : public VerilatedModule {
     CData/*0:0*/ CPU__DOT__control__DOT__jump;
     CData/*0:0*/ __Vclklast__TOP__clk;
     VL_OUT(a0,31,0);
+    VL_OUT(a1,31,0);
+    VL_OUT(t1,31,0);
     IData/*31:0*/ CPU__DOT__pc;
     IData/*31:0*/ CPU__DOT__instr;
     IData/*31:0*/ CPU__DOT__rd1;

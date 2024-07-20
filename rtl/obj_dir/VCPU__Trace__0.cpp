@@ -103,20 +103,22 @@ void VCPU___024root__trace_chg_sub_0(VCPU___024root* vlSelf, VerilatedVcd::Buffe
     bufp->chgBit(oldp+57,(vlSelf->clk));
     bufp->chgBit(oldp+58,(vlSelf->rst));
     bufp->chgIData(oldp+59,(vlSelf->a0),32);
-    bufp->chgBit(oldp+60,(((IData)(vlSelf->CPU__DOT__control__DOT__branch) 
+    bufp->chgIData(oldp+60,(vlSelf->a1),32);
+    bufp->chgIData(oldp+61,(vlSelf->t1),32);
+    bufp->chgBit(oldp+62,(((IData)(vlSelf->CPU__DOT__control__DOT__branch) 
                            | (IData)(vlSelf->CPU__DOT__control__DOT__jump))));
-    bufp->chgIData(oldp+61,(vlSelf->CPU__DOT__rd1),32);
-    bufp->chgIData(oldp+62,(vlSelf->CPU__DOT__rd2),32);
-    bufp->chgIData(oldp+63,(((0U == (IData)(vlSelf->CPU__DOT__resultsrc))
+    bufp->chgIData(oldp+63,(vlSelf->CPU__DOT__rd1),32);
+    bufp->chgIData(oldp+64,(vlSelf->CPU__DOT__rd2),32);
+    bufp->chgIData(oldp+65,(((0U == (IData)(vlSelf->CPU__DOT__resultsrc))
                               ? vlSelf->CPU__DOT__alu_result
                               : ((1U == (IData)(vlSelf->CPU__DOT__resultsrc))
                                   ? vlSelf->CPU__DOT__mem_data
                                   : ((2U == (IData)(vlSelf->CPU__DOT__resultsrc))
                                       ? vlSelf->CPU__DOT__pc
                                       : vlSelf->CPU__DOT__alu_result)))),32);
-    bufp->chgBit(oldp+64,(VL_GTES_III(32, vlSelf->CPU__DOT__rd1, vlSelf->CPU__DOT__src_b)));
-    bufp->chgBit(oldp+65,((vlSelf->CPU__DOT__rd1 >= vlSelf->CPU__DOT__src_b)));
-    bufp->chgIData(oldp+66,((((IData)(vlSelf->CPU__DOT__control__DOT__branch) 
+    bufp->chgBit(oldp+66,(VL_GTES_III(32, vlSelf->CPU__DOT__rd1, vlSelf->CPU__DOT__src_b)));
+    bufp->chgBit(oldp+67,((vlSelf->CPU__DOT__rd1 >= vlSelf->CPU__DOT__src_b)));
+    bufp->chgIData(oldp+68,((((IData)(vlSelf->CPU__DOT__control__DOT__branch) 
                               | (IData)(vlSelf->CPU__DOT__control__DOT__jump))
                               ? (vlSelf->CPU__DOT__pc 
                                  + vlSelf->CPU__DOT__imm_op)

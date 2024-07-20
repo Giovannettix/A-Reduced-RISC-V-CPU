@@ -66,6 +66,10 @@ VL_INLINE_OPT void VCPU___024root___sequent__TOP__1(VCPU___024root* vlSelf) {
     }
     vlSelf->a0 = vlSelf->CPU__DOT__regfile__DOT__registers
         [0xaU];
+    vlSelf->a1 = vlSelf->CPU__DOT__regfile__DOT__registers
+        [0xbU];
+    vlSelf->t1 = vlSelf->CPU__DOT__regfile__DOT__registers
+        [6U];
     vlSelf->CPU__DOT__pc = ((IData)(vlSelf->rst) ? 0U
                              : vlSelf->CPU__DOT__programCounter__DOT__next_PC);
     if ((0x23U != (0x7fU & vlSelf->CPU__DOT__instr))) {

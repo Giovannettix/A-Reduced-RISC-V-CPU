@@ -1,7 +1,9 @@
 module CPU(
     input clk,
     input rst,
-    output [31:0] a0
+    output [31:0] a0,
+    output [31:0] a1,
+    output [31:0] t1
 );
 
 //////////// fetch ///////////////
@@ -37,7 +39,7 @@ assign rd = instr[11:7];
 // Instantiate Register File
 RegFile regfile(.clk(clk), .AD1(rs1), .AD2(rs2), 
     .AD3(rd), .WE3(regwrite), .WD3(result), .RD1(rd1), //wd3
-    .RD2(rd2), .a0(a0));
+    .RD2(rd2), .a0(a0), .a1(a1), .t1(t1));
 
 SignExtend extend( .instr_i(instr), .ImmSrc_i(immsrc), .ImmOp_o(imm_op));
 

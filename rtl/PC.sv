@@ -16,7 +16,7 @@ end
 
 always_comb begin
     if(PCsrc_i) next_PC = pcTarget_i;
-    else next_PC = pc_o + 4;
+    else next_PC = pc_o + 4; //byte addressing not working yet
 end 
 
 endmodule

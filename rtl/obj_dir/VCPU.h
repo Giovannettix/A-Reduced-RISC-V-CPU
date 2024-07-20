@@ -28,6 +28,8 @@ class VCPU VL_NOT_FINAL : public VerilatedModel {
     VL_IN8(&clk,0,0);
     VL_IN8(&rst,0,0);
     VL_OUT(&a0,31,0);
+    VL_OUT(&a1,31,0);
+    VL_OUT(&t1,31,0);
 
     // CELLS
     // Public to allow access to /* verilator public */ items.
