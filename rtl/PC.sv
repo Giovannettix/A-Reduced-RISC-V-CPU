@@ -3,7 +3,7 @@ module PC(
     input rst,
     input PCsrc_i,
     input [31:0] pcTarget_i,
-    output [31:0] pc_o
+    output reg [31:0] pc_o
 );
 
 //assuming we need 32 bits for instr mem addresses

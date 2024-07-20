@@ -7,10 +7,9 @@ module CPU(
 //////////// fetch ///////////////
 
 // Signals for PC
-logic [31:0] pc, pc_next, instr, pcTarget;
-logic PCsrc;
+logic [31:0] pc, instr, pcTarget;
 
-PC pc(.clk(clk), .rst(rst), .PCsrc_i(PCsrc), 
+PC programCounter (.clk(clk), .rst(rst), .PCsrc_i(pcsrc), 
 .pcTarget_i(pcTarget), .pc_o(pc)); //careful about pipelining PCTarget
 
 // Fetch instruction
@@ -37,7 +36,7 @@ assign rd = instr[11:7];
 
 // Instantiate Register File
 RegFile regfile(.clk(clk), .AD1(rs1), .AD2(rs2), 
-    .AD3(rd), .WE3(RegWrite), .WD3(result), .RD1(rd1), //wd3
+    .AD3(rd), .WE3(regwrite), .WD3(result), .RD1(rd1), //wd3
     .RD2(rd2), .a0(a0));
 
 SignExtend extend( .instr_i(instr), .ImmSrc_i(immsrc), .ImmOp_o(imm_op));
@@ -62,6 +61,7 @@ logic [31:0] mem_data;
 DataMem dataMem(.clk(clk), .a(alu_result), .wd(rd2), .we(memwrite), .rd(mem_data));
 
 /////////// Writeback //////////////
+logic [31:0] result;
 
 Resultmux result_mux( .ALU_i(alu_result), .Mem_i(mem_data), .PC_i(pc),
     .ResultSrc_i(resultsrc),

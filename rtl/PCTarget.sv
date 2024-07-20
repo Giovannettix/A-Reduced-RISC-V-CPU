@@ -7,3 +7,4 @@ module PCTarget(
 assign pcTarget_o = PC_i + ImmOp_i;
 
 endmodule
+

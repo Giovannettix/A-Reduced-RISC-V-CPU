@@ -3,7 +3,7 @@ module Resultmux(
     input [31:0] Mem_i,
     input [31:0] PC_i,
     input [1:0] ResultSrc_i,
-    output [31:0] Result_o
+    output reg [31:0] Result_o
 );
 
 always_comb begin

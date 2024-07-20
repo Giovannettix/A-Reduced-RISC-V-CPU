@@ -3,7 +3,7 @@ module InstrMem(
     output [31:0] rd 
 );
 
-logic [31:0] ram_array [31:0];
+bit [31:0] ram_array [bit[31:0]]; //2^32 -1
 
 initial begin
     $display("Loading program.");
@@ -13,3 +13,4 @@ end
 assign rd = ram_array[a];
 
 endmodule
+

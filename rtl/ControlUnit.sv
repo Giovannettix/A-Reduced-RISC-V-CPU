@@ -1,13 +1,13 @@
 module ControlUnit(
     input [2:0] Flags_i, //flags
     input [31:0] Instr_i, 
-    output RegWrite_o, //register write enable
-    output ALUsrc_o, //use imm or RD2
-    output MemWrite_o, // memory write enable
-    output [1:0] ImmSrc_o, //determine imm-type
-    output [4:0] ALUctrl_o, //determine alu-op
-    output PCsrc_o, // PC+4 or PC+imm
-    output [1:0] ResultSrc_o // ALU result, Data memory, PC+4
+    output reg RegWrite_o, //register write enable
+    output reg ALUsrc_o, //use imm or RD2
+    output reg MemWrite_o, // memory write enable
+    output reg [1:0] ImmSrc_o, //determine imm-type
+    output reg [4:0] ALUctrl_o, //determine alu-op
+    output reg PCsrc_o, // PC+4 or PC+imm
+    output reg [1:0] ResultSrc_o // ALU result, Data memory, PC+4
 );
 
 ///////////// Internal Signals /////////////////////////////
@@ -25,7 +25,7 @@ always_comb begin
     RegWrite_o = (op == 3) || (op == 19) || (op == 51) || (op == 55) || (op == 103) || (op == 111); //all except s-type
     ALUsrc_o = (op == 3) || (op==19) || (op==35) || (op==55) || (op==103); //all except r-type and b-type
     MemWrite_o = (op == 35); // s-type
-    PCSrc_o = branch | jump; 
+    PCsrc_o = branch | jump; 
 end
 
 always_comb begin
@@ -77,8 +77,8 @@ always_comb begin
 
         99: begin
             
-            ALUSRc_o = 0; //reg
-            ALUCtrl = 1; //x cause flags
+            ALUsrc_o = 0; //reg
+            ALUctrl_o = 1; //x cause flags
             ImmSrc_o = 2; // 13-bit immediate
             ResultSrc_o = 0; //x
             jump = 0;
@@ -119,7 +119,7 @@ always_comb begin
 
         35: begin //sw only
         ImmSrc_o = 1;
-        ALUSRc_o = 1; //imm
+        ALUsrc_o = 1; //imm
         ALUctrl_o = 0; //add
         ResultSrc_o = 0; //x 
         branch = 0; //x
