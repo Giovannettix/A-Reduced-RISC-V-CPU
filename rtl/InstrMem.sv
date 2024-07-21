@@ -3,7 +3,7 @@ module InstrMem(
     output [31:0] rd 
 );
 
-bit[31:0] ram_array [bit[29:0]]
+bit[31:0] ram_array [bit[29:0]]; //don't change this we need it for pc+4 lol
 
 initial begin
     $display("Loading program.");
