@@ -29,7 +29,7 @@ always_comb begin
 
     if(op == 103) PCsrc_o = 2; //jalr
     else if (branch | op == 111) PCsrc_o = 1; //jal and b-type
-    else PCsrc_o = 0;
+    else PCsrc_o = 0; //pc+4
 end
 
 always_comb begin
@@ -86,32 +86,12 @@ always_comb begin
             ResultSrc_o = 0; //x
 
             case(funct3)
-
-            0: begin ///////////////beq
-                if(zero) branch = 0;
-                else branch = 1;
-            end
-            1: begin ///////////////bne
-                if(~zero) branch = 1;
-                else branch = 0;
-            end
-            4: begin //////////////blt
-                if(~gt) branch = 1;
-                else branch = 0;
-            end
-            5: begin ///////////////bge
-                if(gt) branch = 1;
-                else branch = 0;
-            end
-            6:begin ////////////////bltu
-                if(~gtu) branch = 1;
-                else branch = 0;
-            end
-            7:begin /////////////// bgtu
-                if(gtu) branch = 1;
-                else branch = 0;
-            end
-
+            0: branch = zero; //beq
+            1: branch = ~zero; //bne
+            4: branch = ~gt; //blt
+            5: branch = gt; //bge
+            6: branch = ~gtu; //bltu
+            7: branch = gtu; //bgtu
             endcase
 
         end

@@ -1,5 +1,7 @@
 module DataMem(
     input clk,
+    input [31:0] ioin1,
+    input [31:0] ioin2,
     input [31:0] a,
     input  [31:0] wd,
     input [2:0] funct3, //byte, half, word
@@ -12,7 +14,7 @@ module DataMem(
 bit [7:0] Memory [bit[31:0]];
 
 
-always_ff@(negedge clk) begin
+always_ff@(posedge clk) begin
     if(we) begin //store  
         case(funct3)
             0: {Memory[a]} <= wd[7:0]; //sb
@@ -23,15 +25,22 @@ always_ff@(negedge clk) begin
     end
 end
 
-always_ff@(posedge clk) begin
+always_comb begin
      //load
+    if(a > 32'hBFC00FFF)begin
+            if(a == 32'hFFFFFFFF) 
+                rd = ioin1;
+            else // should be used with 0xFFFFFFDF
+                rd = ioin2;
+        end
+    else
         case(funct3)
-            0: rd <= {{24{Memory[a][7]}}, Memory[a]}; //lb
-            1: rd <= {{16{Memory[a+1][7]}}, Memory[a+1], Memory[a]}; // lh
-            2: rd <= {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
-            4: rd <= {{24{1'b0}}, Memory[a]}; //lbu
-            5: rd <= {{16{1'b0}}, Memory[a+1], Memory[a]}; //lhu
-            default: rd <= {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
+            0: rd = {{24{Memory[a][7]}}, Memory[a]}; //lb
+            1: rd = {{16{Memory[a+1][7]}}, Memory[a+1], Memory[a]}; // lh
+            2: rd = {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
+            4: rd = {{24{1'b0}}, Memory[a]}; //lbu
+            5: rd = {{16{1'b0}}, Memory[a+1], Memory[a]}; //lhu
+            default: rd = {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
         endcase
 end
 

@@ -1,9 +1,14 @@
 module CPU(
     input clk,
     input rst,
+    input [31:0] ioin1,
+    input [31:0] ioin2,
     output [31:0] a0,
     output [31:0] a1,
-    output [31:0] t1
+    output [31:0] t0,
+    output [31:0] t1,
+    output [31:0] t5,
+    output [31:0] t6
 );
 
 //////////// fetch ///////////////
@@ -39,7 +44,7 @@ assign rd = instr[11:7];
 // Instantiate Register File
 RegFile regfile(.clk(clk), .AD1(rs1), .AD2(rs2), 
     .AD3(rd), .WE3(regwrite), .WD3(result), .RD1(rd1), //wd3
-    .RD2(rd2), .a0(a0), .a1(a1), .t1(t1));
+    .RD2(rd2), .a0(a0), .a1(a1), .t0(t0), .t1(t1), .t5(t5),.t6(t6));
 
 SignExtend extend( .instr_i(instr), .ImmSrc_i(immsrc), .ImmOp_o(imm_op));
 
@@ -60,7 +65,7 @@ PCTarget target(.ImmOp_i(imm_op), .PC_i(pc), .pcTarget_o(pcTarget));
 // Memory signals
 logic [31:0] mem_data;
 
-DataMem dataMem(.clk(clk), .a(alu_result), .wd(rd2), .we(memwrite), .rd(mem_data), .funct3(funct3));
+DataMem dataMem(.clk(clk), .a(alu_result), .wd(rd2), .we(memwrite), .rd(mem_data), .funct3(funct3), .ioin1(ioin1), .ioin2(ioin2));
 
 /////////// Writeback //////////////
 logic [31:0] result;

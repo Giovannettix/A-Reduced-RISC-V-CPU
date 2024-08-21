@@ -24,13 +24,16 @@ class VCPU___024root final : public VerilatedModule {
     CData/*2:0*/ CPU__DOT__immsrc;
     CData/*4:0*/ CPU__DOT__aluctrl;
     CData/*0:0*/ CPU__DOT__control__DOT__branch;
-    CData/*0:0*/ CPU__DOT__alu__DOT__zero;
-    CData/*0:0*/ CPU__DOT__alu__DOT__gt;
-    CData/*0:0*/ CPU__DOT__alu__DOT__gtu;
     CData/*0:0*/ __Vclklast__TOP__clk;
+    CData/*2:0*/ __Vchglast__TOP__CPU__DOT__flags;
+    VL_IN(ioin1,31,0);
+    VL_IN(ioin2,31,0);
     VL_OUT(a0,31,0);
     VL_OUT(a1,31,0);
+    VL_OUT(t0,31,0);
     VL_OUT(t1,31,0);
+    VL_OUT(t5,31,0);
+    VL_OUT(t6,31,0);
     IData/*31:0*/ CPU__DOT__pc;
     IData/*31:0*/ CPU__DOT__instr;
     IData/*31:0*/ CPU__DOT__pcTarget;
@@ -41,11 +44,11 @@ class VCPU___024root final : public VerilatedModule {
     IData/*31:0*/ CPU__DOT__alu_result;
     IData/*31:0*/ CPU__DOT__mem_data;
     IData/*31:0*/ CPU__DOT__programCounter__DOT__next_PC;
-    IData/*31:0*/ CPU__DOT__regfile__DOT____Vlvbound_h5453182d__0;
+    IData/*31:0*/ CPU__DOT__regfile__DOT____Vlvbound_h1b83e157__0;
     VlUnpacked<IData/*31:0*/, 31> CPU__DOT__regfile__DOT__registers;
-    VlUnpacked<CData/*0:0*/, 3> __Vm_traceActivity;
+    VlUnpacked<CData/*0:0*/, 4> __Vm_traceActivity;
+    VlAssocArray<IData/*31:0*/, CData/*7:0*/> CPU__DOT__instructions__DOT__ram_array;
     VlAssocArray<IData/*31:0*/, CData/*7:0*/> CPU__DOT__dataMem__DOT__Memory;
-    VlAssocArray<IData/*29:0*/, IData/*31:0*/> CPU__DOT__instructions__DOT__ram_array;
 
     // INTERNAL VARIABLES
     VCPU__Syms* const vlSymsp;

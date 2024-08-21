@@ -1,4 +1,4 @@
-CPU_tb.o: ../CPU_tb.cpp /usr/local/share/verilator/include/verilated.h \
+f1_tb2.o: ../f1_tb2.cpp /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilatedos.h \
  /usr/local/share/verilator/include/verilated_config.h \
  /usr/local/share/verilator/include/verilated_types.h \
@@ -6,4 +6,5 @@ CPU_tb.o: ../CPU_tb.cpp /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated_vcd_c.h \
  /usr/local/share/verilator/include/verilated.h \
  /usr/local/share/verilator/include/verilated_trace.h \
- /usr/local/share/verilator/include/verilated_trace_defs.h VCPU.h
+ /usr/local/share/verilator/include/verilated_trace_defs.h VCPU.h \
+ ../vbuddy.cpp
