@@ -6,22 +6,17 @@ module ALU (
     output [2:0] Flags_o 
 );
 
-/////////// Flags for Branches /////////////////////////
+/////////// Signed Logic /////////////////////////
 
-logic zero; logic gt; logic gtu; // zero, greater-than, greater-than-unsigned
-logic signed [31:0] SrcA_s; logic signed [31:0] SrcB_s; 
+logic signed [31:0] SrcA_s, SrcB_s; 
 
 assign SrcA_s = SrcA_i;
 assign SrcB_s = SrcB_i;
-assign zero = (ALUResult_o == 0);
-assign gt = (SrcA_s >= SrcB_s);
-assign gtu = (SrcA_i >= SrcB_i);
-
-assign Flags_o = {zero, gt, gtu};
 
 ////////////// Instructions ////////////////////////
 
 always_comb begin
+
     case(ALUCtrl_i)
     0: ALUResult_o = SrcA_s + SrcB_s; //add
     1: ALUResult_o = SrcA_s - SrcB_s; //sub
@@ -36,9 +31,12 @@ always_comb begin
     10: ALUResult_o = SrcA_s >>> SrcB_s; // SRA imm
     11: ALUResult_o = SrcA_s | SrcB_s; // or
     12: ALUResult_o = SrcA_s & SrcB_s; // and 
+    13: ALUResult_o = SrcB_i; // u-type instr
     default: ALUResult_o = SrcA_s + SrcB_s;
 
     endcase
+
+    Flags_o = {(ALUResult_o == 0), (SrcA_s >= SrcB_s), (SrcA_i >= SrcB_i)}; //zero, gt, gtu
 
 end
 

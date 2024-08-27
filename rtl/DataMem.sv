@@ -1,25 +1,47 @@
 module DataMem(
     input clk,
+    input [31:0] ioin1,
+    input [31:0] ioin2,
     input [31:0] a,
     input  [31:0] wd,
-    //input [1:0] size, //byte, half, word
+    input [2:0] funct3, //byte, half, word
     input we,
     output reg [31:0] rd
 );
 
 //how can we implement byte-addressable memory?
-//top 30 bits are addressing the word
-//bottom 2 bits are addressing the byte
 
-bit [31:0] Memory [bit[31:0]]; //2^32 -1
+bit [7:0] Memory [bit[31:0]];
 
-//logic [31:0] Memory [29:0];
-//logic [29:0] word;
-//logic [1:0] byte; //byte is not allowed as var name
-//assign {word, byte} = a;
 
-always_ff@(posedge clk)
-    if(we) Memory[a] <= wd;
-    else rd <= Memory[a];
+always_ff@(posedge clk) begin
+    if(we) begin //store  
+        case(funct3)
+            0: {Memory[a]} <= wd[7:0]; //sb
+            1: {Memory[a+1], Memory[a]} <= wd[15:0]; //sh
+            2: {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]} <= wd; //sw
+            default: {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]} <= wd; //sw
+        endcase
+    end
+end
+
+always_comb begin
+     //load
+    if(a > 32'hBFC00FFF)begin
+            if(a == 32'hFFFFFFFF) 
+                rd = ioin1;
+            else // should be used with 0xFFFFFFDF
+                rd = ioin2;
+        end
+    else
+        case(funct3)
+            0: rd = {{24{Memory[a][7]}}, Memory[a]}; //lb
+            1: rd = {{16{Memory[a+1][7]}}, Memory[a+1], Memory[a]}; // lh
+            2: rd = {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
+            4: rd = {{24{1'b0}}, Memory[a]}; //lbu
+            5: rd = {{16{1'b0}}, Memory[a+1], Memory[a]}; //lhu
+            default: rd = {Memory[a+3], Memory[a+2], Memory[a+1], Memory[a]}; //lw
+        endcase
+end
 
 endmodule
