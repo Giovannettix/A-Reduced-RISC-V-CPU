@@ -9,7 +9,7 @@ The textbook "Digital Design and Computer Architecture, RISC-V Edition" by David
 ## Evaluation
 The aim of this project was to properly learn how to use Verilator and Github, and also learn more about CPU designs. I think the work I've done so far has allowed me to acheive these goals, which I am very happy with. Even though I would be pretty confident to improve the design by adding at pipelining/hazard detection, I don't think I will learn as much, so my time is better spent now trying to learn new things!
 
-[![Watch the Video](https://github.com/Giovannettix/A-Reduced-RISC-V-CPU/blob/main/PXL_20240920_100402857.TS.mp4)]
+[![Watch the Video](https://github.com/Giovannettix/A-Reduced-RISC-V-CPU/blob/main/thumbnail.jpg)(https://github.com/Giovannettix/A-Reduced-RISC-V-CPU/blob/main/PXL_20240920_100402857.TS.mp4)]
 
 ## Logbook
 22/07/2024: Managed to create a single-cycle cpu that implements a simple counter program, supporting i-type, r-type and b-type instructions as well as lw and sw. It is able to run a simple counter program. Now, I'm working on integrating the rest of the instructions and testing programs with more instruction types. 
